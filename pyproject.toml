@@ -1,0 +1,41 @@
+[project]
+name = "workshop"
+version = "0.1.0"
+description = "Full-screen terminal arcade starter for an agentic-coding workshop"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    # Full-screen terminal app, keyboard input, and tick timers.
+    "textual>=8.0,<9",
+    # Colour, styles, and cell rendering used by the playfield helper.
+    # Textual already depends on Rich; we pin it because game code uses it directly.
+    "rich>=13.9.4",
+]
+
+[project.scripts]
+workshop = "workshop.app:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+    "ruff>=0.11.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+target-version = "py312"
+src = ["src", "tests"]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.uv]
+default-groups = ["dev"]
